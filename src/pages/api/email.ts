@@ -99,9 +99,9 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  // Send emails 700ms apart
+  // Send emails 1200ms apart
   // Rate limit is 2 per second
-  await new Promise((resolve) => setTimeout(resolve, 700));
+  await new Promise((resolve) => setTimeout(resolve, 1200));
 
   // Send the email
   await sendSecretSantaEmail(participant);
