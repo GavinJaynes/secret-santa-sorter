@@ -38,33 +38,33 @@ function App() {
 
     try {
       const matched = matchParticipants(participants);
-      const response = await Promise.all(
-        matched.map((participant) =>
-          fetch("/api/email", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name: participant.name,
-              email: participant.email,
-              giftValue: globalGiftValue,
-              giftRecipient: participant.assignedTo.name,
-            }),
-          })
-        )
-      );
+
+      for (const participant of matched) {
+        const response = await fetch("/api/email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: participant.name,
+            email: participant.email,
+            giftValue: globalGiftValue,
+            giftRecipient: participant.assignedTo.name,
+          }),
+        });
+
+        if (response.status !== 200) {
+          throw new Error(`Failed to send email to ${participant.name}`);
+        }
+      }
 
       setParticipants(matched);
 
-      // If 200 response, alert the user
-      if (response.every((res) => res.status === 200)) {
-        alert(
-          "Ho ho ho! Secret Santa assignments have been made and emails have been sent! 🎄"
-        );
-        // Clear the participants
-        setParticipants([]);
-      }
+      alert(
+        "Ho ho ho! Secret Santa assignments have been made and emails have been sent! 🎄"
+      );
+      // Clear the participants
+      setParticipants([]);
     } catch (err) {
       setError("Oh no! The elves encountered an error. Please try again.");
     } finally {
