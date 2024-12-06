@@ -39,7 +39,7 @@ async function sendSecretSantaEmail(
 ): Promise<void> {
   try {
     await resend.emails.send({
-      from: fromEmail,
+      from: "Santa <onboarding@resend.dev>",
       to: participant,
       subject: "🎅 Ho Ho Ho! Your Secret Santa Assignment!",
       html: `
@@ -93,8 +93,13 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  // Send emails 700ms apart
+  // Rate limit is 2 per second
+  await new Promise((resolve) => setTimeout(resolve, 700));
+
   // Send the email
   await sendSecretSantaEmail(name, email);
+  console.log("Email sent to", name, email);
 
   // Return a success response
   return responseOutput({

@@ -5,7 +5,7 @@ import type { Participant } from "@/types/participant";
 import { ParticipantForm } from "@/components/ParticipantForm";
 import { ParticipantList } from "@/components/ParticipantList";
 import { ErrorMessage } from "@/components/ErrorMessage";
-//import { ChristmasDecorations } from "@/components/ChristmasDecorations";
+// import { ChristmasDecorations } from "@/components/ChristmasDecorations";
 import { matchParticipants } from "@/utils/secretSanta";
 
 import { Button } from "@/components/ui/button";
