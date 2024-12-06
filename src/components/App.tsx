@@ -48,6 +48,8 @@ function App() {
             body: JSON.stringify({
               name: participant.name,
               email: participant.email,
+              giftValue: globalGiftValue,
+              giftRecipient: participant.assignedTo.name,
             }),
           })
         )
@@ -72,7 +74,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-christmas-red/20 to-christmas-green/10">
-      {/* <ChristmasDecorations /> */}
       <div className="max-w-3xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <div className="flex justify-center items-center gap-4">
@@ -88,7 +89,7 @@ function App() {
           </p>
         </div>
 
-        <div className="bg-white/90 backdrop-blur-sm shadow-lg rounded-lg p-6 space-y-8 border border-gray-200">
+        <div className="bg-white/80 backdrop-blur-sm shadow-lg rounded-lg p-6 space-y-8 border border-gray-200">
           {error && (
             <ErrorMessage message={error} onDismiss={() => setError(null)} />
           )}
@@ -113,14 +114,16 @@ function App() {
           {participants.length >= 2 && (
             <div className="text-center">
               <Button
+                variant="candyCane"
                 onClick={handleAssignSecretSanta}
                 disabled={isAssigning}
                 size="lg"
-                className="font-semibold"
               >
-                {isAssigning
-                  ? "The elves are working..."
-                  : "Assign Secret Santa 🎅"}
+                <span className="flex items-center">
+                  {isAssigning
+                    ? "The elves are working..."
+                    : "Assign Secret Santa 🎅"}
+                </span>
               </Button>
             </div>
           )}

@@ -52,8 +52,10 @@ export function ParticipantForm({ onAdd }: ParticipantFormProps) {
         />
       </div>
       <Button type="submit" className="w-full">
-        <PlusCircle className="w-4 h-4 mr-2" />
-        Add Participant
+        <span className="flex items-center">
+          <PlusCircle className="w-4 h-4 mr-2" />
+          Add Participant
+        </span>
       </Button>
     </form>
   );

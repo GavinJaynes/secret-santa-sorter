@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import bgImage from "@/images/christmas-background.webp";
+
 interface Props {
   title: string;
 }
@@ -17,6 +20,11 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <Image
+      src={bgImage}
+      alt="A southern hemisphere christmas"
+      class="absolute top-0 left-0 w-[calc(100%-3rem)] h-[calc(100%-3rem)] object-cover mix-blend-multiply m-6 rounded-3xl"
+    />
     <slot />
   </body>
 </html>
